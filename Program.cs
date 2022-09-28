@@ -57,14 +57,81 @@ namespace Seminar8HomeWork
             // int [,] array2 = ReverseRows (array);
             // Show2dArray(array2);
 
-            int[,] CreateRandom2dArray(int rows, int cols, int min, int max){
-                int[,] array = new int[rows,cols];
-                for(int i = 0; i<rows; i++)
-                    for(int j = 0; j<cols; j++)
-                        array[i,j] = new Random().Next(min, max+1);
-                return array;
-            }
+            //Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
+            
+            // int[,] CreateRandom2dArray(int rows, int cols, int min, int max){
+            //     int[,] array = new int[rows,cols];
+            //     for(int i = 0; i<rows; i++)
+            //         for(int j = 0; j<cols; j++)
+            //             array[i,j] = new Random().Next(min, max+1);
+            //     return array;
+            // }
 
+            // void Show2dArray(int[,] array){
+            //     for(int i = 0; i<array.GetLength(0); i++){
+            //         for(int j = 0; j<array.GetLength(1); j++){
+            //             Console.Write(array[i,j]+ " ");
+            //         }
+            //         Console.WriteLine();
+            //     }
+            // }
+
+            // int MinSumElements(int[,] array){
+            // int minSum = 0;
+            // int sumRow = 0;
+            // int result = 0;
+            //     for (int i = 0; i < array.GetLength(1); i++)
+            //     {
+            //         minSum += array[0, i];
+            //     }
+                                              
+            //     for (int i=0; i<array.GetLength(0); i++){
+            //         sumRow=0;
+            //         for (int j=0; j<array.GetLength(1); j++){
+            //             sumRow += array[i, j];
+            //             if (sumRow < minSum){
+            //                 minSum = sumRow;
+            //                 result = i+1;
+            //             }
+            //         }
+            //     }
+            //     return result;
+            // }               
+            
+
+            // Console.Write("Input numb of rows: ");
+            // int rows = Convert.ToInt32(Console.ReadLine());
+            // Console.Write("Input numb of cols: ");
+            // int cols = Convert.ToInt32(Console.ReadLine());
+            // Console.Write("Input numb of min: ");
+            // int min = Convert.ToInt32(Console.ReadLine());
+            // Console.Write("Input numb of max: ");
+            // int max = Convert.ToInt32(Console.ReadLine());
+
+            // int[,] array = CreateRandom2dArray(rows,cols,min,max);
+            // Show2dArray(array);
+            // Console.WriteLine();
+            // int NumOfRow = MinSumElements(array);
+            // Console.WriteLine ($"Number of row with minimal sum of elements is: {NumOfRow}");
+
+            //Напишите программу, которая заполнит спирально массив 4 на 4.
+
+            void Spiral (int [,] array, int size){
+                int i=0;
+                int j=0;
+                //задаю максимальное количество чисел, которое остановит цикл по заполнению при достижении количества лементов массива
+                for (int count=0; count<size*size; count++){
+                    //задаю начальное число и циклы заполнения позиций по часовой стрелке
+                    int begin = 1;
+                    for (i = 0; j < array.GetLength(1)-1; j++) array[i, j++] = begin++;
+                    for (j = array.GetLength(0) ; i < array.GetLength(0)-1; i++) array[i++, j] = begin++;
+                    for (i = array.GetLength(1); j > 0 ; j--) array[i, j--] = begin++;
+                    for (j = 0; i > 0  ; i--) array[i--, j] = begin++;
+                    for (i=1; j < array.GetLength(1)-1; j++ ) array[i, j++] = begin++;
+                    for (i = array.GetLength(1)-1; j > 0  ; j--) array[i, j--] = begin++;
+                }    
+            }
+            
             void Show2dArray(int[,] array){
                 for(int i = 0; i<array.GetLength(0); i++){
                     for(int j = 0; j<array.GetLength(1); j++){
@@ -73,45 +140,11 @@ namespace Seminar8HomeWork
                     Console.WriteLine();
                 }
             }
-
-            int MinSumElements(int[,] array){
-            int minSum = 0;
-            int sumRow = 0;
-            int result = 0;
-                for (int i = 0; i < array.GetLength(1); i++)
-                {
-                    minSum += array[0, i];
-                }
-                                              
-                for (int i=0; i<array.GetLength(0); i++){
-                    sumRow=0;
-                    for (int j=0; j<array.GetLength(1); j++){
-                        sumRow += array[i, j];
-                        if (sumRow < minSum){
-                            minSum = sumRow;
-                            result = i+1;
-                        }
-                    }
-                }
-                return result;
-            }               
             
-
-            Console.Write("Input numb of rows: ");
-            int rows = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Input numb of cols: ");
-            int cols = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Input numb of min: ");
-            int min = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Input numb of max: ");
-            int max = Convert.ToInt32(Console.ReadLine());
-
-            int[,] array = CreateRandom2dArray(rows,cols,min,max);
+            int size=4;
+            int [,] array = new int [size,size];
+            Spiral (array, size);
             Show2dArray(array);
-            Console.WriteLine();
-            int NumOfRow = MinSumElements(array);
-            Console.WriteLine ($"Number of row with minimal sum of elements is: {NumOfRow}");
-
         }
     }
 }
