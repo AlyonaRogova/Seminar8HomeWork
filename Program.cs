@@ -116,35 +116,39 @@ namespace Seminar8HomeWork
 
             //Напишите программу, которая заполнит спирально массив 4 на 4.
 
-            void Spiral (int [,] array, int size){
-                int i=0;
-                int j=0;
-                //задаю максимальное количество чисел, которое остановит цикл по заполнению при достижении количества лементов массива
-                for (int count=0; count<size*size; count++){
-                    //задаю начальное число и циклы заполнения позиций по часовой стрелке
-                    int begin = 1;
-                    for (i = 0; j < array.GetLength(1)-1; j++) array[i, j++] = begin++;
-                    for (j = array.GetLength(0) ; i < array.GetLength(0)-1; i++) array[i++, j] = begin++;
-                    for (i = array.GetLength(1); j > 0 ; j--) array[i, j--] = begin++;
-                    for (j = 0; i > 0  ; i--) array[i--, j] = begin++;
-                    for (i=1; j < array.GetLength(1)-1; j++ ) array[i, j++] = begin++;
-                    for (i = array.GetLength(1)-1; j > 0  ; j--) array[i, j--] = begin++;
-                }    
+            int [,] Spiral (int [,] array){
+            int temp = 1;
+            int i = 0;
+            int j = 0;
+
+                while (temp <= array.GetLength(0) * array.GetLength(1)){
+                array[i, j] = temp;
+                temp++;
+                    if (i <= j + 1 && i + j < array.GetLength(1) - 1) j++;
+                    else if (i < j && i + j >= array.GetLength(0) - 1) i++;
+                    else if (i >= j && i + j > array.GetLength(1) - 1) j--;
+                    else i--;
+                }
+                return array;
             }
+
             
-            void Show2dArray(int[,] array){
-                for(int i = 0; i<array.GetLength(0); i++){
-                    for(int j = 0; j<array.GetLength(1); j++){
-                        Console.Write(array[i,j]+ " ");
+            void ShowArray (int[,] array){
+                for (int i = 0; i < array.GetLength(0); i++){
+                    for (int j = 0; j < array.GetLength(1); j++){
+                        if (array[i,j] / 10 <= 0) Console.Write($" {array[i,j]} ");
+                        else Console.Write($"{array[i,j]} ");
                     }
                     Console.WriteLine();
                 }
             }
-            
-            int size=4;
-            int [,] array = new int [size,size];
-            Spiral (array, size);
-            Show2dArray(array);
+
+            int n = 4;
+            int[,] array = new int[n, n];
+            int [,] square = Spiral (array);
+            ShowArray(array);
+
+
         }
     }
 }
